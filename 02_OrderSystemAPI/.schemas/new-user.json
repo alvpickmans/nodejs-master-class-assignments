@@ -1,0 +1,64 @@
+{
+  "title": "New user",
+  "description": "Describes properties to define a new user",
+  "type": "object",
+  "properties": {
+    "firstName": {
+        "type": "string",
+        "description": "First name of the user"
+    },
+    "lastName": {
+        "type": "string",
+        "description": "Last name of the user"
+    },
+    "email": {
+        "type": "string",
+        "description": "User's email",
+        "regexp": "/^(([^<>()\\[\\]\\\\.,;:\\s@']+(\\.[^<>()\\[\\]\\\\.,;:\\s@']+)*)|('.+'))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$/"
+    },
+    "phone": {
+        "type": "string",
+        "description" : "User's phone number, only UK",
+        "regexp": "/^(?:0|\\+?44)(?:\\d\\s?){9,10}$/"
+    },
+    "address": {
+      "$ref": "address-schema"
+    },
+    "password" : {
+        "type": "string",
+        "description": "User's password. Minimum 6 characteres",
+        "minLength": 6
+    }
+  },
+  "required": ["firstName", "lastName", "email", "phone","address", "password"],
+
+
+  "dependencies":{
+    "address-schema":{
+      "$id": "address-schema",
+      "properties": {
+        "street": {
+          "type": "string",
+          "description": "Address' street"
+        },
+        "number": {
+          "type": "number",
+          "description": "Address' number"
+        },
+        "postalCode": {
+          "type": "string",
+          "description": "Postal Code"
+        },
+        "city": {
+            "type": "string",
+            "description" : "City"
+        },
+        "country": {
+          "type": "string",
+          "description": "Country"
+        }
+      },
+      "required": ["street", "number", "postalCode", "city", "country"]
+    }
+  }
+}
